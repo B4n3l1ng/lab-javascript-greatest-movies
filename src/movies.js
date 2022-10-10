@@ -24,13 +24,9 @@ function scoresAverage(moviesArray) {
         return 0;
     }
     let scores = moviesArray.map(movie => movie.score);
-    for (let i=0; i<scores.length; i++) {
-        if (scores[i] === undefined) {
-            scores.splice(i,1);
-        }
-    }
-    let value = scores.reduce((sum,rate) => sum+rate,0);
-    return Math.round((value / total)*100)/100;
+    let scoresFiltered=scores.filter(score => score!==undefined)
+    let value = scoresFiltered.reduce((sum,rate) => sum+rate,0);
+    return parseFloat((value/total).toFixed(2));
 }
 
 // Iteration 4: Drama movies - Get the average of Drama Movies
