@@ -5,12 +5,7 @@ function getAllDirectors(moviesArray) {
     let directors = moviesArray.map((movie)=>{
         return movie.director;
     })
-    const filteredDirectors = [];
-    for (i=0; i<directors.length;i++) {
-        if (filteredDirectors.indexOf(directors[i])===-1) {
-            filteredDirectors.push(directors[i]);
-        }
-    }
+    const filteredDirectors = [...new Set(directors)]
     return filteredDirectors;
 }
 
@@ -87,7 +82,25 @@ function orderAlphabetically(moviesArray) {
 }
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
-function turnHoursToMinutes(moviesArray) {}
+function turnHoursToMinutes(moviesArray) {
+    const copiedArray =[...moviesArray];
+    return moviesArray.map(movie => {
+        const duration = movie.duration.split(' ');
+        let minutes = 0;
+        for (let time of duration) {
+          if (time.includes('h')) {
+            minutes += parseInt(time) * 60;
+          } else {
+            minutes += parseInt(time);
+          }
+          
+        }
+        return {
+            ...movie,
+            duration: minutes
+        };
+      });
+}
 
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
 function bestYearAvg(moviesArray) {}
